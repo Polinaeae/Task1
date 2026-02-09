@@ -11,4 +11,27 @@ public class BankAccount {
     LocalDateTime opening_date;
     boolean booking;
 
+    public boolean Deposit(int amount){
+        if(amount>0 && !booking){
+            balance = balance+amount;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean Withdraw(int amount){
+        if(amount>0 && !booking && amount<=balance){
+            balance = balance-amount;
+            return true;
+        }
+        return false;
+    }
+    public boolean Transfer(BankAccount otherAccount, int amount){
+        if(amount<=0 && booking && otherAccount.booking && balance< amount){
+            return false;
+        }
+        balance -= amount;
+        otherAccount.balance += amount;
+        return true;
+    }
 }
